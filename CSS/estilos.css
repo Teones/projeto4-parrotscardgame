@@ -1,12 +1,11 @@
 * {
     box-sizing: border-box;
 }
-.body {
+body {
     font-family: 'Roboto', sans-serif;
-}
-.corpo {
     background-color: #EEF9BF;
-
+}
+.corpo {    
     display: flex;
     flex-direction: column;
     padding-top: 34px;
@@ -25,7 +24,10 @@ h1 {
     margin: 47px 116px;
 
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 34px;
+
 }
 .carta {
     width: 117px;
@@ -38,8 +40,14 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .carta img {
     width: 100px;
     height: 100px;
+    position: absolute;
+}
+
+.verso {
+    display: none;
 }
