@@ -28,14 +28,14 @@ function disporCartas() {
     let jogo = document.querySelector(".jogo")
     for (let i = 0; i < (quantidadeCartas / 2); i++) {
         cartas.push(`
-            <div class="carta" onclick="virar(this)">
-                <img src="Imagens/front.png" alt="">
-                <img src="Imagens/${imagens[i]}" class="esconder" alt="">
+            <div class="carta" data-identifier="card" onclick="virar(this)">
+                <img src="Imagens/front.png" data-identifier="back-face" alt="">
+                <img src="Imagens/${imagens[i]}" class="esconder" data-identifier="front-face" alt="">
             </div>`)
         cartas.push(`
-            <div class="carta" onclick="virar(this)">
-                <img src="Imagens/front.png" alt="">
-                <img src="Imagens/${imagens[i]}" class="esconder" alt="">
+            <div class="carta" data-identifier="card" onclick="virar(this)">
+                <img src="Imagens/front.png" data-identifier="back-face" alt="">
+                <img src="Imagens/${imagens[i]}" class="esconder" data-identifier="front-face" alt="">
             </div>`)
         cartas.sort(embaralhar)    
     }
@@ -51,16 +51,21 @@ let rodadas = 0
 
 function virar(carta) {
     rodadas += 1
+    
     let capa = carta.children[0]
     capa.classList.add("esconder")
     let gif = carta.children[1]
     gif.classList.remove("esconder")
-
+    
     tipoCartas.push(gif)
     
     cartasViradas += 1
-    console.log(cartasViradas)
-    if (cartasViradas === 2) {
+    if (cartasViradas === 1) {
+        carta.removeAttribute("onclick")
+    } else if (cartasViradas === 2) {
+        let pai = tipoCartas[0].parentNode
+        pai.setAttribute("onclick", "virar(this)")
+        console.log(pai)
         verificarPar()
     }
 }
@@ -75,7 +80,7 @@ function verificarPar() {
         tipoCartas = []
         pontos += 1
 
-        verificarVitoria()
+        setTimeout(verificarVitoria, 100)
     } else {
         setTimeout(naoEhPar, 1000)
     }
