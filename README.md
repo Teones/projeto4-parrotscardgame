@@ -26,7 +26,7 @@ Parrots Card Game is a card game crafted using HTML, CSS, and JavaScript. In thi
 
 ## 🛠️ Open and run the project
 
-- 📁 The FashionDriven project is open source and easily accessible through the link: https://github.com/Teones/projeto4-parrotscardgame.
+- 📁 The Parrots Card Game project is open source and easily accessible through the link: https://github.com/Teones/projeto4-parrotscardgame.
 - ▶️ To run the project, it has also been deployed at the following link: https://teones.github.io/projeto4-parrotscardgame/.
 
 ## ✔️ Techniques and technologies used
