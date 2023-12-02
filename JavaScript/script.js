@@ -1,4 +1,4 @@
-let quantidadeCartas
+let quantidadeCartas = 0
 let imagens = [
     "bobrossparrot.gif",
     "explodyparrot.gif",
@@ -13,19 +13,28 @@ function embaralhar() {
     return Math.random() - 0.5;
 }
 
-let cartas = []
+let cartas
+let cartasViradas
+let tipoCartas
+let rodadas
+let cronometro
 
 function quantasCartas() {
     quantidadeCartas = prompt("Quantas cartas irá jogar? OBS: Número entre 4 e 14")
     if (quantidadeCartas % 2 !== 0 || quantidadeCartas > 14 || quantidadeCartas < 4) {
         quantasCartas()
     } else {
+        cartas = []
+        cartasViradas = 0
+        tipoCartas = []
+        rodadas = 0
         disporCartas()
     }
 } quantasCartas()
 
 function disporCartas() {
     let jogo = document.querySelector(".jogo")
+    jogo.innerHTML = "";
     for (let i = 0; i < (quantidadeCartas / 2); i++) {
         cartas.push(`
             <div class="carta" data-identifier="card" onclick="virar(this)">
@@ -43,15 +52,31 @@ function disporCartas() {
     for (let i = 0; i < cartas.length; i++) {
         jogo.innerHTML += `${cartas[i]}`
     }
+
+    iniciarTempo();
 }
 
-let cartasViradas = 0
-let tipoCartas = []
-let rodadas = 0
+function iniciarTempo(){
+    tempoTotalSegundos = 0;
+    let tempo = document.querySelector(".tempo");
+
+    cronometro = setInterval(() => {
+        tempoTotalSegundos++;
+        const minutos = Math.floor(tempoTotalSegundos / 60);
+        const segundos = tempoTotalSegundos % 60;
+
+        const formatoMinutos = minutos < 10 ? `0${minutos}` : minutos;
+        const formatoSegundos = segundos < 10 ? `0${segundos}` : segundos;
+
+        tempo.innerHTML = `${formatoMinutos}:${formatoSegundos}`;
+    }, 1000)
+}
 
 function virar(carta) {
-    rodadas += 1
-    
+    if (cartasViradas == 2){
+        return
+    }
+
     let capa = carta.children[0]
     capa.classList.add("esconder")
     let gif = carta.children[1]
@@ -75,6 +100,8 @@ let filho
 let pontos = 0
 
 function verificarPar() {
+    rodadas += 1
+
     if (tipoCartas[0].src === tipoCartas[1].src) {
         cartasViradas = 0
         tipoCartas = []
@@ -101,7 +128,19 @@ function naoEhPar() {
 
 function verificarVitoria() {
     if (pontos === (quantidadeCartas / 2)) {
-        let mensagem = `Parabéns, você ganhou em ${rodadas} rodadas`
+        let tempo = document.querySelector(".tempo");
+        let mensagem = `Parabéns, você ganhou em ${rodadas} rodadas e seu tempo foi de: ${tempo.innerHTML}`
         alert(mensagem)
+
+        clearInterval(cronometro)
+        reiniciarJogo()    
+    }
+}
+
+function reiniciarJogo(){
+    let reiniciar = prompt("Você deseja jogar novamente? Clique em OK")
+    console.log(reiniciar)
+    if (reiniciar !== null){
+        quantasCartas()
     }
 }
