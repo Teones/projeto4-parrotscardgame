@@ -11,7 +11,7 @@
 
 Parrots Card Game is a card game crafted using HTML, CSS, and JavaScript. In this game, players search for pairs of parrot gifs, winning upon finding all pairs. The game also features a timer, and the excitement is enhanced by the option to play with a pair quantity ranging from 2 to 7.
 
-|<img src="Imagens/mobile (2).png" alt="Imagem 1" width="150" style="border: none;"/> | <img src="Imagens/mobile (3).png" alt="Imagem 2" width="400" style="border: none;"/> |
+| <div style="text-align: center;"><img src="Imagens/mobile (2).png" alt="Imagem 1" width="100" style="border: none;"/></div> | <div style="text-align: center;"><img src="Imagens/mobile (3).png" alt="Imagem 2" width="400" style="border: none;"/></div> |
 |:-:|:-:|
 
 
